@@ -1,4 +1,4 @@
-#still testing it
+#still testing
 
 #Inputs: Matrix or sparse matrix
 
@@ -29,15 +29,15 @@ list_variables_matrix=function(base){
     list_variables=c(class(base))
     #print(list_variables)
     for(i in 1:(length(pattern)-1)){
-      if(length(grep(pattern[i],pattern))==1){
+      if(length(pattern[which(pattern==pattern[i])])==1){
         variables=c(variables,colnames(base)[i])#find all not factor variables
         names_col=c(names_col,colnames(base)[i])
-        temp=list(Class="numeric",Levels=NULL)#ne pas rajouter si racine déjà dedans
+        temp=list(Class="numeric",Levels=NULL)#ne pas rajouter si racine dÃ©jÃ  dedans
         all=list(variable=temp)
         list_variables=c(list_variables,all)}
       
       else{#Obtenir la racine de la variable
-        pos=grep(pattern[i],pattern)
+        pos=pattern[which(pattern==pattern[i])]
         #print(pos)
         allnames=colnames(base)[pos]
         all_val=c()
@@ -69,12 +69,18 @@ list_variables_matrix=function(base){
             niv=paste(unlist(value)[(min(stops)+1):length(value)],sep="",collapse="")
             Levels=c(Levels,niv)
           }
-          temp=list(Class="factor",Levels=Levels)#ne pas rajouter si racine déjà dedans
+          temp=list(Class="factor",Levels=Levels)#ne pas rajouter si racine dÃ©jÃ  dedans
           all=list(variable=temp)
           list_variables=c(list_variables,all)
           #all_match=c(all_match,temp)}
         }
       }
+      if(pattern[length(pattern)-1])==pattern[length(pattern)]){
+        variables=c(variables,colnames(base)[i])
+        names_col=c(names_col,colnames(base)[i])
+        temp=list(Class="numeric",Levels=NULL)#ne pas rajouter si racine dÃ©jÃ  dedans
+        all=list(variable=temp)
+        list_variables=c(list_variables,all)}
     }
     names(list_variables)<-c("class",names_col)
   }
