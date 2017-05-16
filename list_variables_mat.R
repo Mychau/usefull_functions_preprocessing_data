@@ -1,6 +1,6 @@
 #still testing
 
-#IMPORTANT: doesn't work when the first level of a categorical variable is "". Patch will be available by the 13/05/2017
+#IMPORTANT: doesn't work when the first level of a categorical variable is "". Patch will be available by the 25/05/2017
 
 #Inputs: Matrix or sparse matrix
 
